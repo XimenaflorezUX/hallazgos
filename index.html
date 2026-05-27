@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UX Research Canvas - Magneto Platform</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            600: '#1d4ed8',
+                            700: '#1e40af',
+                            800: '#1e3a8a',
+                            deep: '#0f172a'
+                        },
+                        accent: {
+                            teal: '#0d9488',
+                            orange: '#ea580c',
+                            rose: '#e11d48',
+                            purple: '#8b5cf6',
+                            indigo: '#4f46e5'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            from: { opacity: '0', transform: 'translateY(10px)' },
+                            to: { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    },
+                    animation: {
+                        fadeIn: 'fadeIn 0.3s ease-in-out',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-brand-800 text-white shadow-lg border-b border-brand-700">
+        <div class="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <div class="flex items-center gap-2 text-accent-teal font-semibold text-sm uppercase tracking-wider mb-1">
+                    <span class="w-2.5 h-2.5 rounded-full bg-accent-teal inline-block animate-pulse"></span>
+                    UX Research & Strategy Dashboard
+                </div>
+                <h1 class="text-3xl font-bold tracking-tight">Magneto Platform 360°</h1>
+                <p class="text-slate-300 text-sm mt-1">Diagnóstico integral de Experiencia de Usuario: Ecosistema Candidatos (B2C) y Empresas (B2B).</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Global Tabs Navigation -->
+    <div class="bg-white border-b border-slate-200 sticky top-0 z-10 shadow-sm">
+        <div class="max-w-7xl mx-auto px-6">
+            <nav class="flex space-x-8" aria-label="Tabs">
+                <button type="button" onclick="switchMainTab('b2c')" id="btn-tab-b2c" class="border-accent-teal text-brand-800 whitespace-nowrap py-4 px-1 border-b-4 font-bold text-sm flex items-center gap-2 transition-all">
+                    <i data-lucide="users" class="w-5 h-5"></i>
+                    Análisis B2C
+                </button>
+                <button type="button" onclick="switchMainTab('b2b')" id="btn-tab-b2b" class="border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 whitespace-nowrap py-4 px-1 border-b-4 font-bold text-sm flex items-center gap-2 transition-all">
+                    <i data-lucide="building-2" class="w-5 h-5"></i>
+                    Análisis B2B
+                </button>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="max-w-7xl mx-auto px-6 py-8">
+
+       <div id="view-b2c" class="block animate-fadeIn">
+            <!-- Alerta metodológica -->
+            <div class="bg-blue-50 border-l-4 border-brand-600 p-4 rounded-r-xl mb-8 flex items-start gap-3">
+                <i data-lucide="info" class="w-6 h-6 text-brand-600 shrink-0 mt-0.5"></i>
+                <div>
+                    <h3 class="font-bold text-brand-800 text-sm">Enfoque B2C: Aplicar a Vacantes</h3>
+                    <p class="text-xs text-brand-700 mt-1 leading-relaxed">
+                        Este módulo se centra en reducir la fricción de postulación (CES), eliminar el "agujero negro" de comunicación (Ghosting) y estabilizar la experiencia móvil para los candidatos que buscan empleo.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 1. METRICS B2C -->
+            <section class="mb-10">
+                <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                    <i data-lucide="bar-chart-3" class="text-brand-600"></i>
+                    Métricas del Canal B2C (Basado en Respuestas Activas)
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <!-- CSAT Card -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 relative overflow-hidden">
+                        <div class="absolute right-0 bottom-0 opacity-10 text-brand-600 pointer-events-none">
+                            <i data-lucide="smile" class="w-24 h-24 -mr-4 -mb-4"></i>
+                        </div>
+                        <p class="text-sm font-semibold text-slate-400 uppercase tracking-wider">CSAT Promedio</p>
+                        <div class="flex items-baseline gap-2 mt-2">
+                            <span class="text-4xl font-extrabold text-slate-800" id="stat-csat">3.71</span>
+                            <span class="text-sm font-medium text-slate-500">/ 5.0</span>
+                        </div>
+                        <div class="mt-4 flex items-center gap-2">
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">Regular - Estable</span>
+                        </div>
+                    </div>
+
+                    <!-- CES Card -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 relative overflow-hidden">
+                        <div class="absolute right-0 bottom-0 opacity-10 text-brand-600 pointer-events-none">
+                            <i data-lucide="zap" class="w-24 h-24 -mr-4 -mb-4"></i>
+                        </div>
+                        <p class="text-sm font-semibold text-slate-400 uppercase tracking-wider">Nivel de Esfuerzo (CES)</p>
+                        <div class="flex items-baseline gap-2 mt-2">
+                            <span class="text-4xl font-extrabold text-slate-800" id="stat-ces">3.65</span>
+                            <span class="text-sm font-medium text-slate-500">/ 5.0</span>
+                        </div>
+                        <div class="mt-4 flex items-center gap-2">
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-rose-50 text-rose-700 border border-rose-200">Fricción Moderada-Alta</span>
+                        </div>
+                    </div>
+
+                    <!-- Total Respuestas -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 relative overflow-hidden">
+                        <div class="absolute right-0 bottom-0 opacity-10 text-brand-600 pointer-events-none">
+                            <i data-lucide="users" class="w-24 h-24 -mr-4 -mb-4"></i>
+                        </div>
+                        <p class="text-sm font-semibold text-slate-400 uppercase tracking-wider">Muestra Analizada</p>
+                        <div class="flex items-baseline gap-2 mt-2">
+                            <span class="text-4xl font-extrabold text-slate-800" id="stat-total">1,048</span>
+                            <span class="text-sm font-medium text-slate-500">usuarios</span>
+                        </div>
+                        <div class="mt-4 flex items-center gap-2">
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-teal-50 text-accent-teal border border-teal-200">100% Feedback directo</span>
+                        </div>
+                    </div>
+
+                    <!-- Distribución Crítica -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 relative overflow-hidden">
+                        <p class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Distribución de Alertas</p>
+                        <div class="space-y-2">
+                            <div>
+                                <div class="flex justify-between text-xs font-bold text-slate-600 mb-1">
+                                    <span>Críticos (CSAT 1-2)</span>
+                                    <span id="stat-crit-pct">31.4%</span>
+                                </div>
+                                <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                                    <div class="bg-accent-rose h-full rounded-full" style="width: 31.4%" id="stat-crit-bar"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs font-bold text-slate-600 mb-1">
+                                    <span>Pasivos (CSAT 3)</span>
+                                    <span id="stat-pas-pct">15.2%</span>
+                                </div>
+                                <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                                    <div class="bg-amber-500 h-full rounded-full" style="width: 15.2%" id="stat-pas-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. CANVAS B2C -->
+            <section class="mb-12">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
+                            <i data-lucide="layers" class="text-accent-teal"></i>
+                            Ejes de Dolor UX Detallados (Candidatos)
+                        </h2>
+                    </div>
+
+                    <!-- Quick Filter Tabs B2C -->
+                    <div class="flex flex-wrap gap-2 w-full md:w-auto">
+                        <button type="button" onclick="switchSubTab('b2c', 'all')" id="tab-b2c-all" class="tab-btn-b2c px-4 py-2 text-xs font-bold rounded-lg bg-brand-800 text-white shadow-sm border border-brand-800 transition-all flex items-center gap-1.5">
+                            <i data-lucide="grid" class="w-3.5 h-3.5"></i> Todos
+                        </button>
+                        <button type="button" onclick="switchSubTab('b2c', 'ghosting')" id="tab-b2c-ghosting" class="tab-btn-b2c px-4 py-2 text-xs font-semibold rounded-lg bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition-all flex items-center gap-1.5">
+                            <i data-lucide="ghost" class="w-3.5 h-3.5"></i> Ghosting
+                        </button>
+                        <button type="button" onclick="switchSubTab('b2c', 'bugs')" id="tab-b2c-bugs" class="tab-btn-b2c px-4 py-2 text-xs font-semibold rounded-lg bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition-all flex items-center gap-1.5">
+                            <i data-lucide="bug" class="w-3.5 h-3.5"></i> Bugs App
+                        </button>
+                        <button type="button" onclick="switchSubTab('b2c', 'filters')" id="tab-b2c-filters" class="tab-btn-b2c px-4 py-2 text-xs font-semibold rounded-lg bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition-all flex items-center gap-1.5">
+                            <i data-lucide="sliders-horizontal" class="w-3.5 h-3.5"></i> Filtros
+                        </button>
+                        <button type="button" onclick="switchSubTab('b2c', 'complexity')" id="tab-b2c-complexity" class="tab-btn-b2c px-4 py-2 text-xs font-semibold rounded-lg bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition-all flex items-center gap-1.5">
+                            <i data-lucide="file-text" class="w-3.5 h-3.5"></i> Registro
+                        </button>
+                    </div>
+                </div>
+
+                <!-- GRID OF PROBLEMS B2C -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+                    <!-- B2C CARD 1 -->
+                    <div class="problem-card-b2c bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden flex flex-col justify-between" data-category="ghosting">
+                        <div class="p-6">
+                            <div class="flex justify-between items-start gap-4 mb-4">
+                                <div class="bg-rose-50 p-3 rounded-xl text-accent-rose"><i data-lucide="ghost" class="w-6 h-6"></i></div>
+                                <span class="px-2.5 py-1 text-xs font-semibold bg-rose-50 text-accent-rose rounded-full border border-rose-100">Prioridad: Crítica (42%)</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">1. El "Agujero Negro" (Ghosting)</h3>
+                            <p class="text-sm text-slate-500 mb-6">Los candidatos aplican pero nunca reciben noticias sobre el estado del proceso. Se quedan en etapas preliminares indefinidamente.</p>
+                            <div class="space-y-4 mb-6">
+                                <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-slate-300">
+                                    <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Quotes</p>
+                                    <p class="text-xs italic text-slate-600">"Deberían hacer una devolución del porqué sí continúas o no en el proceso."</p>
+                                </div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">💡 How Might We (HMW)</h4>
+                                    <p class="text-sm font-semibold text-slate-800">¿Cómo podríamos automatizar notificaciones de estado y descartes sin sobrecargar la gestión manual de las empresas?</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-brand-50 p-5 border-t border-brand-100 rounded-b-2xl">
+                            <h4 class="text-xs font-bold text-brand-700 uppercase tracking-wider mb-2">🎯 UX Proposal</h4>
+                            <ul class="text-xs text-brand-800 space-y-2">
+                                <li class="flex items-start gap-1.5"><i data-lucide="check" class="w-4 h-4 text-accent-teal shrink-0 mt-0.5"></i> <strong>Timeline del Proceso:</strong> Barra visual de estados (Recibida, Revisada, Finalistas, Cerrado).</li>
+                                <li class="flex items-start gap-1.5"><i data-lucide="check" class="w-4 h-4 text-accent-teal shrink-0 mt-0.5"></i> <strong>Trigger de Cierre:</strong> Push notification automatizado al cerrar la vacante.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- B2C CARD 2 -->
+                    <div class="problem-card-b2c bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden flex flex-col justify-between" data-category="bugs">
+                        <div class="p-6">
+                            <div class="flex justify-between items-start gap-4 mb-4">
+                                <div class="bg-orange-50 p-3 rounded-xl text-accent-orange"><i data-lucide="bug" class="w-6 h-6"></i></div>
+                                <span class="px-2.5 py-1 text-xs font-semibold bg-orange-50 text-accent-orange rounded-full border border-orange-100">Prioridad: Crítica (28%)</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">2. Inestabilidad Técnica Móvil</h3>
+                            <p class="text-sm text-slate-500 mb-6">El sistema presenta fallas de usabilidad y rendimiento al intentar forzar una interfaz de escritorio en dispositivos móviles.</p>
+                            <div class="space-y-4 mb-6">
+                                <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-slate-300">
+                                    <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Quotes</p>
+                                    <p class="text-xs italic text-slate-600">"La app se traba al aplicar y tengo que reiniciar desde el navegador."</p>
+                                </div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">💡 How Might We (HMW)</h4>
+                                    <p class="text-sm font-semibold text-slate-800">¿Cómo mantener la relación del sitio web de escritorio en el sitio web mobile?</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-brand-50 p-5 border-t border-brand-100 rounded-b-2xl">
+                            <h4 class="text-xs font-bold text-brand-700 uppercase tracking-wider mb-2">🎯 UX Proposal</h4>
+                            <ul class="text-xs text-brand-800 space-y-2">
+                                <li class="flex items-start gap-1.5"><i data-lucide="check" class="w-4 h-4 text-accent-teal shrink-0 mt-0.5"></i> <strong>Responsive:</strong> Adoptar un diseño Mobile-First eliminando tamaños fijos y usando un panel lateral (drawer) para filtros. Esto garantiza una navegación fluida, elimina el scroll horizontal y mejora la interacción táctil nativa.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- B2C CARD 3 -->
+                    <div class="problem-card-b2c bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden flex flex-col justify-between" data-category="filters">
+                        <div class="p-6">
+                            <div class="flex justify-between items-start gap-4 mb-4">
+                                <div class="bg-indigo-50 p-3 rounded-xl text-brand-600"><i data-lucide="sliders-horizontal" class="w-6 h-6"></i></div>
+                                <span class="px-2.5 py-1 text-xs font-semibold bg-indigo-50 text-brand-600 rounded-full border border-indigo-100">Prioridad: Alta (18%)</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">3. Fallas en Filtros de Ciudad</h3>
+                            <p class="text-sm text-slate-500 mb-6">El buscador "olvida" el filtro geográfico o arroja vacantes ubicadas en otras regiones mezcladas, también puede pasar que hayan algunas ubicaciones con el mismo nombre, ejemplo: Rionegro Antioquia y Rionegro Santander.</p>
+                            <div class="space-y-4 mb-6">
+                                <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-slate-300">
+                                    <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Quotes</p>
+                                    <p class="text-xs italic text-slate-600">"Coloco mi ciudad y me salen ofertas de todo el país mezcladas."</p>
+                                </div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">💡 How Might We (HMW)</h4>
+                                    <p class="text-sm font-semibold text-slate-800">¿Cómo podríamos hacer que el filtro geográfico sea predictivo y más intuitivo?</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-brand-50 p-5 border-t border-brand-100 rounded-b-2xl">
+                            <h4 class="text-xs font-bold text-brand-700 uppercase tracking-wider mb-2">🎯 UX Proposal</h4>
+                            <ul class="text-xs text-brand-800 space-y-2">
+                                <li class="flex items-start gap-1.5"><i data-lucide="check" class="w-4 h-4 text-accent-teal shrink-0 mt-0.5"></i> <strong>Persistencia:</strong> Almacenar la ubicación preferida como filtro inicial automático.</li>
+                                <li class="flex items-start gap-1.5"><i data-lucide="check" class="w-4 h-4 text-accent-teal shrink-0 mt-0.5"></i> <strong>Etiquetas visuales:</strong> Tags de ubicación visibles en las vacantes para evitar confusiones en la ubicación, ejemplo: Rionegro, Antioquia. Así evitamos tener confusión al momento de mostrar las búsquedas y al aplicar a la vacante.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- B2C CARD 4 -->
+                    <div class="problem-card-b2c bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden flex flex-col justify-between" data-category="complexity">
+                        <div class="p-6">
+                            <div class="flex justify-between items-start gap-4 mb-4">
+                                <div class="bg-emerald-50 p-3 rounded-xl text-emerald-600"><i data-lucide="file-text" class="w-6 h-6"></i></div>
+                                <span class="px-2.5 py-1 text-xs font-semibold bg-emerald-50 text-emerald-600 rounded-full border border-emerald-100">Prioridad: Media (12%)</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">4. Fatiga de Registro</h3>
+                            <p class="text-sm text-slate-500 mb-6">Procesos de registro muy largos. Se exige diligenciar datos que ya están en el PDF de la hoja de vida.</p>
+                            <div class="space-y-4 mb-6">
+                                <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-slate-300">
+                                    <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Quotes</p>
+                                    <p class="text-xs italic text-slate-600">"Tengo que volver a escribir todo mi perfil aunque ya subí mi archivo PDF."</p>
+                                </div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">💡 How Might We (HMW)</h4>
+                                    <p class="text-sm font-semibold text-slate-800">¿Cómo podríamos simplificar el proceso inicial de aplicación para evitar abandono?</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-brand-50 p-5 border-t border-brand-100 rounded-b-2xl">
+                            <h4 class="text-xs font-bold text-brand-700 uppercase tracking-wider mb-2">🎯 UX Proposal</h4>
+                            <ul class="text-xs text-brand-800 space-y-2">
+                                <li class="flex items-start gap-1.5"><i data-lucide="check" class="w-4 h-4 text-accent-teal shrink-0 mt-0.5"></i> <strong>Parseo:</strong> Mejorar el parseo automático para asegurar que los candidatos llenen de manera más sencilla los datos básicos de su perfil.</li>
+                                <li class="flex items-start gap-1.5"><i data-lucide="check" class="w-4 h-4 text-accent-teal shrink-0 mt-0.5"></i> <strong>Easy Apply:</strong> Versión rápida de aplicación diferiendo el registro complejo.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- B2C ROADMAP -->
+                <div class="bg-brand-deep rounded-2xl shadow-xl text-white p-8 mt-12">
+                    <div class="mb-6">
+                        <span class="text-accent-teal font-semibold text-xs uppercase tracking-wider">Hoja de Ruta B2C</span>
+                        <h2 class="text-2xl font-bold mt-1">Next Steps UX (Candidatos)</h2>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-slate-800/80 border border-slate-700 rounded-xl p-5">
+                            <h3 class="font-bold text-slate-100 mb-3"><span class="text-accent-teal">1.</span> Quick Wins</h3>
+                            <ul class="text-slate-300 text-sm space-y-2">
+                                <li>• Auto-guardado en formularios.</li>
+                                <li>• Corrección bugs móviles.</li>
+                                <li>• Arreglo de filtros geográficos.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-800/80 border border-slate-700 rounded-xl p-5">
+                            <h3 class="font-bold text-slate-100 mb-3"><span class="text-indigo-400">2.</span> Rediseño Core</h3>
+                            <ul class="text-slate-300 text-sm space-y-2">
+                                <li>• Postulación rápida (1-Click).</li>
+                                <li>• IA Parser de CVs.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-800/80 border border-slate-700 rounded-xl p-5">
+                            <h3 class="font-bold text-slate-100 mb-3"><span class="text-accent-orange">3.</span> Ecosistema</h3>
+                            <ul class="text-slate-300 text-sm space-y-2">
+                                <li>• Avisos automáticos de descarte.</li>
+                                <li>• Integración fluida de pruebas.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+
+        <!-- ========================================== -->
+        <!-- VISTA B2B (EMPRESAS / RECLUTADORES)        -->
+        <!-- ========================================== -->
+        <div id="view-b2b" class="hidden animate-fadeIn">
+            <!-- Alerta metodológica -->
+            <div class="bg-purple-50 border-l-4 border-purple-600 p-4 rounded-r-xl mb-8 flex items-start gap-3">
+                <i data-lucide="building" class="w-6 h-6 text-purple-600 shrink-0 mt-0.5"></i>
+                <div>
+                    <h3 class="font-bold text-purple-900 text-sm">Enfoque B2B: Gestión de Talentos</h3>
+                    <p class="text-xs text-purple-800 mt-1 leading-relaxed">
+                        Este módulo mapea la experiencia de los reclutadores (ATS). Los dolores principales se concentran en la <strong>precisión del matching de IA, ineficiencia en acciones masivas (bulk actions), la exportación manual de reportes complejos y la estabilidad y rendimiento del sistema.</strong>
+                    </p>
+                </div>
+            </div>
+
+            <!-- 1. METRICS B2B (REAL DATA) -->
+            <section class="mb-10">
+                <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                    <i data-lucide="pie-chart" class="text-purple-600"></i>
+                    Métricas del Canal B2B (Reclutadores - Marzo & Abril)
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- CSAT Card B2B -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 relative overflow-hidden">
+                        <p class="text-sm font-semibold text-slate-400 uppercase tracking-wider">CSAT Empresas</p>
+                        <div class="flex items-baseline gap-2 mt-2">
+                            <span class="text-4xl font-extrabold text-slate-800">4.10</span>
+                            <span class="text-sm font-medium text-slate-500">/ 5.0</span>
+                        </div>
+                        <div class="mt-4 flex items-center gap-2">
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-50 text-green-700 border border-green-200">82% Satisfacción</span>
+                        </div>
+                    </div>
+
+                    <!-- CES Card B2B -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 relative overflow-hidden">
+                        <p class="text-sm font-semibold text-slate-400 uppercase tracking-wider">Nivel de Esfuerzo (CES)</p>
+                        <div class="flex items-baseline gap-2 mt-2">
+                            <span class="text-4xl font-extrabold text-slate-800">3.80</span>
+                            <span class="text-sm font-medium text-slate-500">/ 5.0</span>
+                        </div>
+                        <div class="mt-4 flex items-center gap-2">
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">Fricción Moderada</span>
+                        </div>
+                    </div>
+
+                    <!-- Total Respondents B2B -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 relative overflow-hidden">
+                        <p class="text-sm font-semibold text-slate-400 uppercase tracking-wider">Muestra Empresas</p>
+                        <div class="flex items-baseline gap-2 mt-2">
+                            <span class="text-4xl font-extrabold text-slate-800">1,324</span>
+                            <span class="text-sm font-medium text-slate-500">Reclutadores</span>
+                        </div>
+                        <div class="mt-4 flex items-center gap-2">
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-purple-50 text-purple-700 border border-purple-200">Solo Marzo y Abril</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. CANVAS B2B -->
+            <section class="mb-12">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
+                            <i data-lucide="briefcase" class="text-purple-600"></i>
+                            Ejes de Dolor UX Detallados (Reclutadores)
+                        </h2>
+                    </div>
+
+                    <!-- Quick Filter Tabs B2B -->
+                    <div class="flex flex-wrap gap-2 w-full md:w-auto">
+                        <button type="button" onclick="switchSubTab('b2b', 'all')" id="tab-b2b-all" class="tab-btn-b2b px-4 py-2 text-xs font-bold rounded-lg bg-purple-800 text-white shadow-sm border border-purple-800 transition-all flex items-center gap-1.5">
+                            <i data-lucide="grid" class="w-3.5 h-3.5"></i> Todos
+                        </button>
+                        <button type="button" onclick="switchSubTab('b2b', 'matching')" id="tab-b2b-matching" class="tab-btn-b2b px-4 py-2 text-xs font-semibold rounded-lg bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition-all flex items-center gap-1.5">
+                            <i data-lucide="target" class="w-3.5 h-3.5"></i> Calidad IA (45%)
+                        </button>
+                        <button type="button" onclick="switchSubTab('b2b', 'bulk')" id="tab-b2b-bulk" class="tab-btn-b2b px-4 py-2 text-xs font-semibold rounded-lg bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition-all flex items-center gap-1.5">
+                            <i data-lucide="mouse-pointer-click" class="w-3.5 h-3.5"></i> Acciones Masivas (30%)
+                        </button>
+                        <button type="button" onclick="switchSubTab('b2b', 'reports')" id="tab-b2b-reports" class="tab-btn-b2b px-4 py-2 text-xs font-semibold rounded-lg bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition-all flex items-center gap-1.5">
+                            <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5"></i> Exportación (25%)
+                        </button>
+                        <button type="button" onclick="switchSubTab('b2b', 'performance')" id="tab-b2b-performance" class="tab-btn-b2b px-4 py-2 text-xs font-semibold rounded-lg bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition-all flex items-center gap-1.5">
+                            <i data-lucide="zap-off" class="w-3.5 h-3.5"></i> Plataforma Lenta (60%)
+                        </button>
+                        <button type="button" onclick="switchSubTab('b2b', 'drafts')" id="tab-b2b-drafts" class="tab-btn-b2b px-4 py-2 text-xs font-semibold rounded-lg bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition-all flex items-center gap-1.5">
+                            <i data-lucide="file-warning" class="w-3.5 h-3.5"></i> Pérdida Vacantes (25%)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- GRID OF PROBLEMS B2B -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+                    <!-- B2B CARD 1 -->
+                    <div class="problem-card-b2b bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden flex flex-col justify-between" data-category="matching">
+                        <div class="p-6">
+                            <div class="flex justify-between items-start gap-4 mb-4">
+                                <div class="bg-purple-50 p-3 rounded-xl text-purple-600"><i data-lucide="target" class="w-6 h-6"></i></div>
+                                <span class="px-2.5 py-1 text-xs font-semibold bg-rose-50 text-accent-rose rounded-full border border-rose-100">Prioridad: Crítica (45% de quejas)</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">1. Inconsistencia en Calidad (Matching IA)</h3>
+                            <p class="text-sm text-slate-500 mb-6">El filtro de inteligencia artificial arroja como "compatibles" a candidatos que no cumplen los requisitos excluyentes (como idioma o ubicación exacta), generando mucho ruido operativo en el inicio del embudo.</p>
+                            <div class="space-y-4 mb-6">
+                                <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-slate-300">
+                                    <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Quotes de Empresas</p>
+                                    <p class="text-xs italic text-slate-600">"La IA nos trae candidatos que no cumplen con los requisitos mínimos que configuramos al inicio."</p>
+                                    <p class="text-xs italic text-slate-600 mt-2">"Mucho ruido en la primera etapa, perdemos valioso tiempo descartando perfiles de forma manual."</p>
+                                </div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">💡 How Might We (HMW)</h4>
+                                    <p class="text-sm font-semibold text-slate-800">¿Cómo podríamos mejorar la precisión del matching inicial para que el reclutador solo vea perfiles pre-calificados con alta compatibilidad?</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-purple-50 p-5 border-t border-purple-100 rounded-b-2xl">
+                            <h4 class="text-xs font-bold text-purple-700 uppercase tracking-wider mb-2">🎯 UX Proposal / Refinement</h4>
+                            <ul class="text-xs text-purple-800 space-y-2">
+                                <li class="flex items-start gap-1.5"><i data-lucide="check" class="w-4 h-4 text-purple-500 shrink-0 mt-0.5"></i> <strong>Smart Matching Weights:</strong> Un sistema visual interactivo para que el reclutador asigne prioridad (Alta, Media, Excluyente) a variables de experiencia, salario e idioma antes de publicar la oferta.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- B2B CARD 2 -->
+                    <div class="problem-card-b2b bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden flex flex-col justify-between" data-category="bulk">
+                        <div class="p-6">
+                            <div class="flex justify-between items-start gap-4 mb-4">
+                                <div class="bg-blue-50 p-3 rounded-xl text-blue-600"><i data-lucide="mouse-pointer-click" class="w-6 h-6"></i></div>
+                                <span class="px-2.5 py-1 text-xs font-semibold bg-orange-50 text-accent-orange rounded-full border border-orange-100">Prioridad: Alta (30% de quejas)</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">2. Dificultad en Acciones Masivas (Kanban)</h3>
+                            <p class="text-sm text-slate-500 mb-6">El tablero ATS carece de flexibilidad para realizar acciones en lote. Los reclutadores deben mover o descartar candidatos individualmente, resultando en un cuello de botella grave en vacantes masivas.</p>
+                            <div class="space-y-4 mb-6">
+                                <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-slate-300">
+                                    <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Quotes de Empresas</p>
+                                    <p class="text-xs italic text-slate-600">"Descartar de a uno es eterno cuando tienes 200 o más inscritos en una vacante."</p>
+                                    <p class="text-xs italic text-slate-600 mt-2">"Queremos enviar respuestas masivas personalizadas pero la interfaz no lo permite de forma ágil."</p>
+                                </div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">💡 How Might We (HMW)</h4>
+                                    <p class="text-sm font-semibold text-slate-800">¿Cómo podríamos optimizar la interfaz del tablero para que los reclutadores realicen acciones masivas de manera segura, evitando errores operacionales?</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 p-5 border-t border-blue-100 rounded-b-2xl">
+                            <h4 class="text-xs font-bold text-blue-700 uppercase tracking-wider mb-2">🎯 UX Proposal / Refinement</h4>
+                            <ul class="text-xs text-blue-800 space-y-2">
+                                <li class="flex items-start gap-1.5"><i data-lucide="check" class="w-4 h-4 text-blue-500 shrink-0 mt-0.5"></i> <strong>Bulk Tooltip & Selection:</strong> Implementación de selección multi-tarjetas en el Kanban con una barra flotante inferior dinámica con atajos directos para "Avanzar etapa", "Descartar" y "Mandar plantilla de email".</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- B2B CARD 3 -->
+                    <div class="problem-card-b2b bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden flex flex-col justify-between" data-category="reports">
+                        <div class="p-6">
+                            <div class="flex justify-between items-start gap-4 mb-4">
+                                <div class="bg-emerald-50 p-3 rounded-xl text-emerald-600"><i data-lucide="file-spreadsheet" class="w-6 h-6"></i></div>
+                                <span class="px-2.5 py-1 text-xs font-semibold bg-emerald-50 text-emerald-600 rounded-full border border-emerald-100">Prioridad: Media (25% de quejas)</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">3. Visualización y Exportación de Reportes</h3>
+                            <p class="text-sm text-slate-500 mb-6">Falta de visualización directa de embudos de selección y tiempos de contratación. La información se debe descargar en Excel y procesar de manera externa porque los reportes exportados vienen desestructurados o sucios.</p>
+                            <div class="space-y-4 mb-6">
+                                <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-slate-300">
+                                    <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Quotes de Empresas</p>
+                                    <p class="text-xs italic text-slate-600">"Descargar un reporte para enviarle al cliente o gerencia es súper complejo."</p>
+                                    <p class="text-xs italic text-slate-600 mt-2">"La información que se exporta en Excel está desordenada o incompleta, toca volver a formatear todo."</p>
+                                </div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">💡 How Might We (HMW)</h4>
+                                    <p class="text-sm font-semibold text-slate-800">¿Cómo podríamos agilizar la exportación de métricas de proceso para que los líderes de reclutamiento presenten reportes listos en segundos?</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-emerald-50 p-5 border-t border-emerald-100 rounded-b-2xl">
+                            <h4 class="text-xs font-bold text-emerald-700 uppercase tracking-wider mb-2">🎯 UX Proposal / Refinement</h4>
+                            <ul class="text-xs text-emerald-800 space-y-2">
+                                <li class="flex items-start gap-1.5"><i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i> <strong>Report Builder Integrado:</strong> Módulo de reportería rápida con gráficos interactivos descargables en PDF limpio y una exportación a Excel pre-formateada con tablas pivote listas.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- B2B CARD 4 -->
+                    <div class="problem-card-b2b bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden flex flex-col justify-between" data-category="performance">
+                        <div class="p-6">
+                            <div class="flex justify-between items-start gap-4 mb-4">
+                                <div class="bg-rose-50 p-3 rounded-xl text-accent-rose"><i data-lucide="zap-off" class="w-6 h-6"></i></div>
+                                <span class="px-2.5 py-1 text-xs font-semibold bg-rose-100 text-rose-700 rounded-full border border-rose-200">P0 (Crítica) - ~180+ menciones (60%)</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">4. Inestabilidad y Lentitud de Plataforma</h3>
+                            <p class="text-sm text-slate-500 mb-6">Los reclutadores experimentan una latencia severa o caídas intermitentes del sistema al listar vacantes y procesar candidatos, afectando directamente la operación diaria.</p>
+                            <div class="space-y-4 mb-6">
+                                <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-slate-300">
+                                    <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Arquitectura & Diagnóstico</p>
+                                    <p class="text-sm font-semibold text-slate-700">Dependencia crítica de Elasticsearch para operaciones transaccionales (Latencia de catálogo).</p>
+                                    <p class="text-xs italic text-slate-600 mt-2">"La plataforma tarda demasiado en cargar mi lista de vacantes activas."</p>
+                                </div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">💡 How Might We (HMW)</h4>
+                                    <p class="text-sm font-semibold text-slate-800">¿Cómo podríamos optimizar el motor de búsquedas para desacoplar las consultas pesadas transaccionales de la base de datos principal?</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-rose-50 p-5 border-t border-rose-100 rounded-b-2xl">
+                            <h4 class="text-xs font-bold text-rose-700 uppercase tracking-wider mb-2">🎯 UX & Tech Proposal</h4>
+                            <ul class="text-xs text-rose-800 space-y-2">
+                                <li class="flex items-start gap-1.5"><i data-lucide="check" class="w-4 h-4 text-accent-rose shrink-0 mt-0.5"></i> <strong>Query Offloading:</strong> Rediseñar la interfaz para usar paginación controlada y almacenar buffers temporales (Redis caching) en las consultas de catálogo recurrentes.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- B2B CARD 5 -->
+                    <div class="problem-card-b2b bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden flex flex-col justify-between" data-category="drafts">
+                        <div class="p-6">
+                            <div class="flex justify-between items-start gap-4 mb-4">
+                                <div class="bg-amber-50 p-3 rounded-xl text-accent-orange"><i data-lucide="file-warning" class="w-6 h-6"></i></div>
+                                <span class="px-2.5 py-1 text-xs font-semibold bg-amber-100 text-amber-700 rounded-full border border-amber-200">P1 (Alta) - ~75 menciones (25%)</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">5. Pérdida de Vacantes y Borradores</h3>
+                            <p class="text-sm text-slate-500 mb-6">Se presenta un bug donde los borradores en creación se desvanecen o eliminan campos clave (como preguntas pre-filtro) al intentar realizar modificaciones en etapas del flujo.</p>
+                            <div class="space-y-4 mb-6">
+                                <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-slate-300">
+                                    <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Diagnóstico de Bug</p>
+                                    <p class="text-sm font-semibold text-slate-700">Bug: La modificación de etapas activa el borrado automático involuntario de preguntas pre-filtro.</p>
+                                    <p class="text-xs italic text-slate-600 mt-2">"Estaba editando las etapas de mi convocatoria y todo mi cuestionario de preguntas se borró de la nada."</p>
+                                </div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">💡 How Might We (HMW)</h4>
+                                    <p class="text-sm font-semibold text-slate-800">¿Cómo podríamos estructurar un guardado intermedio resiliente que aísle las ediciones de etapa de los datos del cuestionario pre-filtro?</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-amber-50 p-5 border-t border-amber-100 rounded-b-2xl">
+                            <h4 class="text-xs font-bold text-amber-700 uppercase tracking-wider mb-2">🎯 UX & Tech Proposal</h4>
+                            <ul class="text-xs text-amber-800 space-y-2">
+                                <li class="flex items-start gap-1.5"><i data-lucide="check" class="w-4 h-4 text-accent-orange shrink-0 mt-0.5"></i> <strong>State Preservation:</strong> Refactorizar el flujo de guardado del wizard de creación. Separar esquemas lógicos y lanzar una advertencia visual ("Popover") antes de reiniciar cualquier sección.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- B2B ROADMAP -->
+                <div class="bg-slate-900 rounded-2xl shadow-xl text-white p-8 mt-12">
+                    <div class="mb-6">
+                        <span class="text-purple-400 font-semibold text-xs uppercase tracking-wider">Hoja de Ruta B2B (Empresas)</span>
+                        <h2 class="text-2xl font-bold mt-1">Next Steps UX (Reclutadores)</h2>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-slate-800/80 border border-slate-700 rounded-xl p-5">
+                            <h3 class="font-bold text-slate-100 mb-3"><span class="text-purple-400">1.</span> Eficiencia Operativa & Bugs</h3>
+                            <ul class="text-slate-300 text-sm space-y-2">
+                                <li>• Resolver el bug de pérdida de pre-filtros en borradores.</li>
+                                <li>• Implementar UI de selección masiva (Bulk Actions).</li>
+                            </ul>
+                            <div class="mt-4 text-xs text-purple-400 font-semibold"><i data-lucide="clock" class="w-3 h-3 inline"></i> 2 - 4 Semanas</div>
+                        </div>
+                        <div class="bg-slate-800/80 border border-slate-700 rounded-xl p-5">
+                            <h3 class="font-bold text-slate-100 mb-3"><span class="text-blue-400">2.</span> Arquitectura & Elasticsearch</h3>
+                            <ul class="text-slate-300 text-sm space-y-2">
+                                <li>• Optimizar indexación de consultas del catálogo para mitigar latencia.</li>
+                                <li>• Rediseñar el motor de exportación de reportes a XLS.</li>
+                            </ul>
+                            <div class="mt-4 text-xs text-blue-400 font-semibold"><i data-lucide="clock" class="w-3 h-3 inline"></i> 1 - 2 Meses</div>
+                        </div>
+                        <div class="bg-slate-800/80 border border-slate-700 rounded-xl p-5">
+                            <h3 class="font-bold text-slate-100 mb-3"><span class="text-emerald-400">3.</span> Integraciones Core</h3>
+                            <ul class="text-slate-300 text-sm space-y-2">
+                                <li>• Dashboard ejecutivo con KPIs y cuellos de botella del embudo.</li>
+                                <li>• Smart Matching Weights configurable por el reclutador.</li>
+                            </ul>
+                            <div class="mt-4 text-xs text-emerald-400 font-semibold"><i data-lucide="clock" class="w-3 h-3 inline"></i> Q3 Continuo</div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+
+        <!-- FOOTER & BRAND -->
+        <footer class="border-t border-slate-200 pt-8 pb-12 flex flex-col md:flex-row justify-between items-center text-slate-400 text-xs mt-8">
+            <p>© 2026 Magneto Platform S.A.S. Tablero interno de UX Research (B2C & B2B).</p>
+            <p class="flex items-center gap-1"><i data-lucide="heart" class="w-3.5 h-3.5 text-rose-500"></i> Diseñado para el Futuro del Talento</p>
+        </footer>
+
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        const TAB_ACTIVE_B2C = ['border-accent-teal', 'text-brand-800'];
+        const TAB_ACTIVE_B2B = ['border-purple-500', 'text-purple-900'];
+        const TAB_INACTIVE = ['border-transparent', 'text-slate-500'];
+
+        function setTabClasses(btn, activeClasses, isActive) {
+            [...TAB_ACTIVE_B2C, ...TAB_ACTIVE_B2B, ...TAB_INACTIVE].forEach(c => btn.classList.remove(c));
+            if (isActive) {
+                activeClasses.forEach(c => btn.classList.add(c));
+            } else {
+                TAB_INACTIVE.forEach(c => btn.classList.add(c));
+            }
+        }
+
+        function switchMainTab(viewId) {
+            const viewB2C = document.getElementById('view-b2c');
+            const viewB2B = document.getElementById('view-b2b');
+            const btnB2C = document.getElementById('btn-tab-b2c');
+            const btnB2B = document.getElementById('btn-tab-b2b');
+
+            if (viewId === 'b2c') {
+                viewB2B.classList.add('hidden');
+                viewB2C.classList.remove('hidden');
+                setTabClasses(btnB2C, TAB_ACTIVE_B2C, true);
+                setTabClasses(btnB2B, TAB_ACTIVE_B2B, false);
+            } else {
+                viewB2C.classList.add('hidden');
+                viewB2B.classList.remove('hidden');
+                setTabClasses(btnB2B, TAB_ACTIVE_B2B, true);
+                setTabClasses(btnB2C, TAB_ACTIVE_B2C, false);
+            }
+            lucide.createIcons();
+        }
+
+        function switchSubTab(context, category) {
+            const tabs = document.querySelectorAll(`.tab-btn-${context}`);
+            const cards = document.querySelectorAll(`.problem-card-${context}`);
+
+            const activeBg = context === 'b2c' ? 'bg-brand-800' : 'bg-purple-800';
+            const inactiveBorder = context === 'b2c' ? 'border-brand-800' : 'border-purple-800';
+
+            tabs.forEach(tab => {
+                tab.classList.remove(activeBg, 'text-white', 'shadow-sm', inactiveBorder);
+                tab.classList.add('bg-white', 'text-slate-600', 'border', 'border-slate-200');
+            });
+
+            const activeTab = document.getElementById(`tab-${context}-${category}`);
+            if (activeTab) {
+                activeTab.classList.remove('bg-white', 'text-slate-600', 'border-slate-200');
+                activeTab.classList.add(activeBg, 'text-white', 'shadow-sm', inactiveBorder);
+            }
+
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
