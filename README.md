@@ -2,7 +2,11 @@
 
 Dashboard estático de hallazgos UX para los canales **B2C** (candidatos) y **B2B** (reclutadores) de Magneto Platform.
 
-## Uso
+## Demo en vivo
+
+**https://ximenaflorezux.github.io/hallazgos/**
+
+## Uso local
 
 Abre `index.html` en el navegador o sirve la carpeta con cualquier servidor estático.
 
